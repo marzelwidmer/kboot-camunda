@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1oibykd" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.6.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.18.0">
+  <bpmn:process id="MyFooBarProcess" name="MyFooBarProcess" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_0al5yo1</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:serviceTask id="Activity_0s7u86w" name="registriere Prozessdaten" camunda:delegateExpression="${MyFooBean}">
+      <bpmn:incoming>Flow_0al5yo1</bpmn:incoming>
+      <bpmn:outgoing>Flow_0l57e45</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="Event_0uyj03n">
+      <bpmn:incoming>Flow_1u8f8bk</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0al5yo1" sourceRef="StartEvent_1" targetRef="Activity_0s7u86w" />
+    <bpmn:sequenceFlow id="Flow_0l57e45" sourceRef="Activity_0s7u86w" targetRef="Activity_0c9zk73" />
+    <bpmn:sequenceFlow id="Flow_1u8f8bk" sourceRef="Activity_0c9zk73" targetRef="Event_0uyj03n" />
+    <bpmn:serviceTask id="Activity_0c9zk73" name="Franchise ändern" camunda:delegateExpression="${MyBarBean}">
+      <bpmn:incoming>Flow_0l57e45</bpmn:incoming>
+      <bpmn:outgoing>Flow_1u8f8bk</bpmn:outgoing>
+    </bpmn:serviceTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="MyFooBarProcess">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="192" y="79" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0m4v58b_di" bpmnElement="Activity_0s7u86w">
+        <dc:Bounds x="160" y="270" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0uyj03n_di" bpmnElement="Event_0uyj03n">
+        <dc:Bounds x="192" y="492" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1af4csx_di" bpmnElement="Activity_0c9zk73">
+        <dc:Bounds x="160" y="380" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0al5yo1_di" bpmnElement="Flow_0al5yo1">
+        <di:waypoint x="210" y="115" />
+        <di:waypoint x="210" y="270" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0l57e45_di" bpmnElement="Flow_0l57e45">
+        <di:waypoint x="210" y="350" />
+        <di:waypoint x="210" y="380" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1u8f8bk_di" bpmnElement="Flow_1u8f8bk">
+        <di:waypoint x="210" y="460" />
+        <di:waypoint x="210" y="492" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
