@@ -19,11 +19,12 @@ spring:
       roles: ACTUATOR
 
 
-camunda.bpm.admin-user:
-  id: demo
-  password: demo
 
-
+camunda:
+  bpm:
+    admin-user:
+      id: demo
+      password: demo
 
 ---
 spring:
