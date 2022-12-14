@@ -18,12 +18,6 @@ spring:
     user:
       roles: ACTUATOR
 
-  data:
-    mongodb:
-      database: demo-db
-      auto-index-creation: true
-
-
 ---
 spring:
   config:
