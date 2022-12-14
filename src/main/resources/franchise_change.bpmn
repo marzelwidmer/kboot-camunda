@@ -4,7 +4,7 @@
     <bpmn:startEvent id="StartEvent_1">
       <bpmn:outgoing>Flow_0al5yo1</bpmn:outgoing>
     </bpmn:startEvent>
-    <bpmn:serviceTask id="Activity_0s7u86w" name="registriere Prozessdaten" camunda:delegateExpression="${MyFooBean}">
+    <bpmn:serviceTask id="Activity_0s7u86w" name="registriere Prozessdaten" camunda:delegateExpression="${myFooBean}">
       <bpmn:incoming>Flow_0al5yo1</bpmn:incoming>
       <bpmn:outgoing>Flow_0l57e45</bpmn:outgoing>
     </bpmn:serviceTask>
@@ -14,7 +14,7 @@
     <bpmn:sequenceFlow id="Flow_0al5yo1" sourceRef="StartEvent_1" targetRef="Activity_0s7u86w" />
     <bpmn:sequenceFlow id="Flow_0l57e45" sourceRef="Activity_0s7u86w" targetRef="Activity_0c9zk73" />
     <bpmn:sequenceFlow id="Flow_1u8f8bk" sourceRef="Activity_0c9zk73" targetRef="Event_0uyj03n" />
-    <bpmn:serviceTask id="Activity_0c9zk73" name="Franchise ändern" camunda:delegateExpression="${MyBarBean}">
+    <bpmn:serviceTask id="Activity_0c9zk73" name="Franchise ändern" camunda:delegateExpression="${myBarBean}">
       <bpmn:incoming>Flow_0l57e45</bpmn:incoming>
       <bpmn:outgoing>Flow_1u8f8bk</bpmn:outgoing>
     </bpmn:serviceTask>
