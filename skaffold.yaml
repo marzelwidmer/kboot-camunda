@@ -1,0 +1,47 @@
+apiVersion: skaffold/v2beta25
+kind: Config
+metadata:
+  name: demo-service
+build:
+  artifacts:
+  - image: demo-service
+    jib:
+      args:
+      - -Pjib,integration,contracts,documentation
+      fromImage: registry.access.redhat.com/ubi8/openjdk-11:latest
+      type: maven
+  tagPolicy:
+    sha256: {}
+deploy:
+  kustomize:
+    paths:
+    - k8s/installs/k3d
+
+profiles:
+- name: aks
+  build:
+    artifacts:
+    - image: c3smonkey.azurecr.io/demo-service
+      jib:
+        args:
+        - -Pjib,integration,contracts,documentation
+        - -Dimage=c3smonkey.azurecr.io/demo-service
+  deploy:
+    kustomize:
+      paths:
+      - k8s/installs/aks
+
+- name: os4
+  build:
+    artifacts:
+      - image: default-route-openshift-image-registry.apps-crc.testing/demo/demo-service
+        jib:
+          args:
+            - -Pjib,integration,contracts,documentation
+            - -Dimage=image-registry.openshift-image-registry.svc:5000/demo/demo-service
+    insecureRegistries: [ "default-route-openshift-image-registry.apps-crc.testing" ]
+
+  deploy:
+    kustomize:
+      paths:
+        - k8s/installs/os4

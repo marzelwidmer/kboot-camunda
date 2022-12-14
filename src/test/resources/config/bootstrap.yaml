@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: demo-service
+
+  cloud:
+    kubernetes:
+      config:
+        enabled: false
+      reload:
+        enabled: false
