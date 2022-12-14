@@ -13,18 +13,11 @@ spring:
   config:
     import:
       - classpath:config/common.yaml
+      - classpath:config/camunda.yaml
 
   security:
     user:
       roles: ACTUATOR
-
-
-
-camunda:
-  bpm:
-    admin-user:
-      id: demo
-      password: demo
 
 ---
 spring:

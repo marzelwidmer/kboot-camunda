@@ -1,11 +1,13 @@
 package ch.keepcalm.demo
 
+import org.camunda.bpm.client.spring.annotation.EnableExternalTaskClient
 import org.camunda.bpm.engine.delegate.DelegateExecution
 import org.camunda.bpm.engine.delegate.JavaDelegate
 import org.camunda.bpm.spring.boot.starter.annotation.EnableProcessApplication
 import org.springframework.boot.ApplicationRunner
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
+import org.springframework.context.annotation.Configuration
 import org.springframework.context.support.beans
 import org.springframework.stereotype.Component
 
@@ -19,15 +21,7 @@ fun main(args: Array<String>) {
         addInitializers(
             beans {
                 bean {
-                    ApplicationRunner {
-                        println("ApplicationRunner ----------------->")
-//                        val repositoryService = ref<RepositoryService>()
-//                        repositoryService.createDeployment()
-//                            .addClasspathResource("franchise_change.bpmn")
-//                            .deploy()
-
-
-                    }
+                    ApplicationRunner {}
                 }
             }
         )
@@ -47,4 +41,3 @@ class MyBarBean() : JavaDelegate {
         println("-------------> Hello from MyBarBean")
     }
 }
-
