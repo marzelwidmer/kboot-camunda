@@ -1,0 +1,30 @@
+# No k8s needed
+---
+spring:
+  config:
+    activate:
+      on-profile: postgres
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+
+    datasource:
+      type: com.zaxxer.hikari.HikariDataSource
+      url: jdbc:postgresql://localhost:5432/camunda-db
+      username: postgres
+      password: postgres
+
+      hikari:
+        jdbc-url: jdbc:postgresql://localhost:5432/camunda-db
+        username: postgres
+        password: postgres
+        driver-class-name: org.postgresql.Driver
+        pool-name: CAMUNDA-HIKARI-POOL
+        idle-timeout: 3000
+        minimum-idle: 30
+        maximum-pool-size: 10
+        connection-timeout: 2000
+        connection-test-query: select 1
+        transaction-isolation: TRANSACTION_READ_COMMITTED
+
+

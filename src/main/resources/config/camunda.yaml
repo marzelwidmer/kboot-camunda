@@ -1,8 +1,31 @@
 camunda:
   bpm:
+    enabled: true
+
     admin-user:
       id: demo
       password: demo
+      email: foo@bar.com
+      first-name: Foo
+      last-name: Bar
 
-#    database:
-#      type: postgres
+    database:
+      schema-update: true
+
+    filter:
+      create: All
+
+    authorization:
+      enabled: true
+
+    history-level: full
+
+    auto-deployment-enabled: true
+
+    default-number-of-retries: 3
+
+    job-execution:
+      enabled: true
+
+    webapp:
+      application-path: /camunda
