@@ -50,7 +50,6 @@ class MyFooBean() : JavaDelegate {
 class MyBarBean() : JavaDelegate {
     override fun execute(delegate: DelegateExecution?) {
         println("-------------> Hello from MyBarBean")
-//        Thread.sleep(60000)
     }
 }
 
