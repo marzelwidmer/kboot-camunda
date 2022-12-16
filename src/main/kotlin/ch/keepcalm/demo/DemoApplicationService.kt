@@ -1,22 +1,25 @@
 package ch.keepcalm.demo
 
+import mu.KLogging
 import org.camunda.bpm.engine.RuntimeService
 import org.camunda.bpm.engine.delegate.DelegateExecution
 import org.camunda.bpm.engine.delegate.JavaDelegate
 import org.camunda.bpm.spring.boot.starter.annotation.EnableProcessApplication
-import org.springframework.beans.factory.InitializingBean
 import org.springframework.boot.ApplicationRunner
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 import org.springframework.context.support.beans
+import org.springframework.scheduling.annotation.EnableScheduling
+import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Component
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
-import javax.annotation.PostConstruct
-
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 @SpringBootApplication
 @EnableProcessApplication
+@EnableScheduling
 class DemoApplicationService
 
 
@@ -25,7 +28,11 @@ fun main(args: Array<String>) {
         addInitializers(
             beans {
                 bean {
-                    ApplicationRunner {}
+                    ApplicationRunner {
+                        println("ApplicationRunner :////////------------->>>")
+                        val runtimeService = ref<RuntimeService>()
+                        runtimeService.startProcessInstanceByKey("myFooBarProcess")
+                    }
                 }
             }
         )
@@ -44,7 +51,6 @@ class MyBarBean() : JavaDelegate {
     override fun execute(delegate: DelegateExecution?) {
         println("-------------> Hello from MyBarBean")
 //        Thread.sleep(60000)
-        println("-------------> wake up du sack")
     }
 }
 
@@ -56,24 +62,31 @@ class FooBar(private val runtimeService: RuntimeService){
         runtimeService.startProcessInstanceByKey("myFooBarProcess")
         return "started.."
     }
-
 }
 
-//
-//@Component
-//class StartProcessInstanceBean(private val runtimeService: RuntimeService) {
-//    @PostConstruct
-//    fun postConstruct() {
-//        runtimeService.startProcessInstanceByKey("myFooBarProcess")
-//    }
-//}
 
 
 
 
 
+/**
+ * Mark this class an injectable component so that the Spring environment will create
+ * an instance of this class when it starts up.
+ */
+@Component
+class ScheduleTasks(private val runtimeService: RuntimeService)  {
 
+    companion object : KLogging()
 
+    /**
+     * run every 5 seconds
+     */
+    @Scheduled(fixedRate = 5000)
+    fun reportTime(){
+        logger.info("The time is now ${DateTimeFormatter.ISO_LOCAL_TIME.format(LocalDateTime.now())}")
+        runtimeService.startProcessInstanceByKey("myFooBarProcess")
+    }
+}
 
 
 

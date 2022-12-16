@@ -13,6 +13,7 @@ spring:
   config:
     import:
       - classpath:config/common.yaml
+      - classpath:config/postgres.yaml
       - classpath:config/camunda.yaml
 
   security:

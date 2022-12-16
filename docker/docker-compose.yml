@@ -1,14 +1,19 @@
-version: '3.7'
-
+version: '3'
 services:
-
-  mongo:
-    image: mongo:latest
-    ports:
-      - 27017:27017
-
-  mongo-express:
-    image: mongo-express
+  postgres-db:
+    container_name: postgres-db
+    image: postgres:latest
     restart: always
     ports:
-      - 8081:8081
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: camunda-db
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - /var/lib/postgres
+
+volumes:
+  postgres-data:
+
