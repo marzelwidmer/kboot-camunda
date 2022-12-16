@@ -4,3 +4,5 @@ camunda:
       id: demo
       password: demo
 
+#    database:
+#      type: postgres

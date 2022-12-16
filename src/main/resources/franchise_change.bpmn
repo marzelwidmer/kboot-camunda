@@ -5,33 +5,28 @@
     <bpmn:startEvent id="StartEvent_1">
       <bpmn:outgoing>Flow_0al5yo1</bpmn:outgoing>
     </bpmn:startEvent>
-    <bpmn:serviceTask id="Activity_0s7u86w" name="registriere Prozessdaten" camunda:delegateExpression="${myFooBean}">
+    <bpmn:serviceTask id="Activity_0s7u86w" name="registriere Prozessdaten" camunda:asyncBefore="true" camunda:delegateExpression="${myFooBean}">
       <bpmn:incoming>Flow_0al5yo1</bpmn:incoming>
       <bpmn:outgoing>Flow_0l57e45</bpmn:outgoing>
     </bpmn:serviceTask>
     <bpmn:endEvent id="Event_0uyj03n">
-      <bpmn:incoming>Flow_10a73t1</bpmn:incoming>
+      <bpmn:incoming>Flow_1u8f8bk</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="Flow_0al5yo1" sourceRef="StartEvent_1" targetRef="Activity_0s7u86w" />
     <bpmn:sequenceFlow id="Flow_0l57e45" sourceRef="Activity_0s7u86w" targetRef="Activity_0c9zk73" />
-    <bpmn:sequenceFlow id="Flow_1u8f8bk" sourceRef="Activity_0c9zk73" targetRef="Activity_03mkglh" />
-    <bpmn:serviceTask id="Activity_0c9zk73" name="Franchise ändern" camunda:delegateExpression="${myBarBean}">
+    <bpmn:sequenceFlow id="Flow_1u8f8bk" sourceRef="Activity_0c9zk73" targetRef="Event_0uyj03n" />
+    <bpmn:serviceTask id="Activity_0c9zk73" name="Franchise ändern" camunda:asyncBefore="true" camunda:delegateExpression="${myBarBean}">
+      <bpmn:extensionElements>
+        <camunda:failedJobRetryTimeCycle>R3/PT10S</camunda:failedJobRetryTimeCycle>
+      </bpmn:extensionElements>
       <bpmn:incoming>Flow_0l57e45</bpmn:incoming>
       <bpmn:outgoing>Flow_1u8f8bk</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:userTask id="Activity_03mkglh" name="doSomethin">
-      <bpmn:incoming>Flow_1u8f8bk</bpmn:incoming>
-      <bpmn:outgoing>Flow_10a73t1</bpmn:outgoing>
-    </bpmn:userTask>
-    <bpmn:sequenceFlow id="Flow_10a73t1" sourceRef="Activity_03mkglh" targetRef="Event_0uyj03n" />
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="myFooBarProcess">
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
         <dc:Bounds x="192" y="79" width="36" height="36" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0m4v58b_di" bpmnElement="Activity_0s7u86w">
-        <dc:Bounds x="160" y="270" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_0uyj03n_di" bpmnElement="Event_0uyj03n">
         <dc:Bounds x="192" y="492" width="36" height="36" />
@@ -40,29 +35,20 @@
         <dc:Bounds x="160" y="380" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_02jeuim_di" bpmnElement="Activity_03mkglh">
-        <dc:Bounds x="350" y="390" width="100" height="80" />
-        <bpmndi:BPMNLabel />
+      <bpmndi:BPMNShape id="Activity_0m4v58b_di" bpmnElement="Activity_0s7u86w">
+        <dc:Bounds x="160" y="200" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_0al5yo1_di" bpmnElement="Flow_0al5yo1">
         <di:waypoint x="210" y="115" />
-        <di:waypoint x="210" y="270" />
+        <di:waypoint x="210" y="200" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0l57e45_di" bpmnElement="Flow_0l57e45">
-        <di:waypoint x="210" y="350" />
+        <di:waypoint x="210" y="280" />
         <di:waypoint x="210" y="380" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1u8f8bk_di" bpmnElement="Flow_1u8f8bk">
-        <di:waypoint x="260" y="420" />
-        <di:waypoint x="305" y="420" />
-        <di:waypoint x="305" y="430" />
-        <di:waypoint x="350" y="430" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_10a73t1_di" bpmnElement="Flow_10a73t1">
-        <di:waypoint x="350" y="430" />
-        <di:waypoint x="289" y="430" />
-        <di:waypoint x="289" y="510" />
-        <di:waypoint x="228" y="510" />
+        <di:waypoint x="210" y="460" />
+        <di:waypoint x="210" y="492" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
